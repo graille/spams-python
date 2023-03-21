@@ -89,7 +89,7 @@ def get_config():
     if platform.system() == 'Windows':
         openblas_path = os.environ.get('OPENBLAS_PATH', None)
         if openblas_path is not None:
-            libs.append('openblas')
+            libs.append('libopenblas')
             libdirs.append(os.path.join(Path(openblas_path, 'bin').resolve().as_posix()))
             libdirs.append(os.path.join(Path(openblas_path, 'lib').resolve().as_posix()))
             incs.append(os.path.join(Path(openblas_path, 'include').resolve().as_posix()))
