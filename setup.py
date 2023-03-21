@@ -71,7 +71,7 @@ def get_config():
         if 'centos' in distro.id():
             libs.extend(['openblaso', 'lapack'])  # for openmp support in openblas
         else:
-            libs.extend(['openblas'])
+            libs.extend(['libopenblas'])
 
     # Check for openmp flag, mac is done later
     if platform.system() != 'Darwin':
@@ -89,7 +89,7 @@ def get_config():
     if platform.system() == 'Windows':
         openblas_path = os.environ.get('OPENBLAS_PATH', None)
         if openblas_path is not None:
-            libs.append('libopenblas')
+            libs.append('openblas')
             libdirs.append(os.path.join(Path(openblas_path, 'bin').resolve().as_posix()))
             libdirs.append(os.path.join(Path(openblas_path, 'lib').resolve().as_posix()))
             incs.append(os.path.join(Path(openblas_path, 'include').resolve().as_posix()))
