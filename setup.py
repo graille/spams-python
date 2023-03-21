@@ -1,6 +1,7 @@
 import os
 import platform
 
+from pathlib import Path
 from setuptools import setup, Extension, find_packages
 from distutils.sysconfig import get_python_inc
 from openmp_helpers import add_openmp_flags_if_available
@@ -90,6 +91,7 @@ def get_config():
         if openblas_path is not None:
             libs.append('openblas')
             libdirs.append(os.path.join(Path(openblas_path, 'bin').resolve().as_posix()))
+            libdirs.append(os.path.join(Path(openblas_path, 'lib').resolve().as_posix()))
             incs.append(os.path.join(Path(openblas_path, 'include').resolve().as_posix()))
 
     return incs, libs, libdirs, cc_flags, link_flags
