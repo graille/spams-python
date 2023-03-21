@@ -86,14 +86,11 @@ def get_config():
         link_flags.append('-L/usr/local/opt/openblas/lib')
 
     if platform.system() == 'Windows':
-        # dir_path = os.path.dirname(os.path.realpath(__file__))
-        # Look for local intel mkl
-        # libpath = os.path.join(dir_path, 'lib', 'native', 'win-x64')
-        libs.append('openblas')
-        libpath = os.path.join('C:/Miniconda/envs/openblas/Library/lib')
-        libdirs.append(libpath)
-        incs.append('C:/Miniconda/envs/openblas/Library/include')
-        incs.append('C:/Miniconda/envs/openblas/Library/include/openblas')
+        openblas_path = os.environ.get('OPENBLAS_PATH', None)
+        if openblas_path is not None:
+            libs.append('openblas')
+            libdirs.append(os.path.join(Path(openblas_path, 'bin').resolve().as_posix()))
+            incs.append(os.path.join(Path(openblas_path, 'include').resolve().as_posix()))
 
     return incs, libs, libdirs, cc_flags, link_flags
 
